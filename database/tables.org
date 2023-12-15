@@ -1,31 +1,30 @@
 TABLES:
-- buildings(_building_id_, level, building_type, =planet_id=)
-
-- building_upgrades(=building_id=, =resource_id=)
-
-- cargos(_cargo_id_, =module_id=)
-
-- contributions(=player_name=, =building_id=)
-
-- guilds(_guild_id_, announcement_channel, =planet_id=)
-
-- locations(_x_pos_, _y_pos_, name)
-
-- modules(_module_id_, level, state, module_type, =cargo_id=, =ship_id=)
+- locations(_location_x_pos_, _location_y_pos_, name)
 
 - planets(_planet_id_, free_slots, =location_x_pos=, =location_y_pos=)
 
-- players(_discord_name_, class, money, reputation, x_pos, y_pos, =guild_id=)
+- buildings(_building_id_, level, building_type, =planet_id=)
 
-- polls(_vote_id_, type, creation_time,)
+- guilds(_guild_id_, announcement_channel, =planet_id=)
 
-- reports(_report_id_, content, creation_time, =player_name=)
+- players(__player_id_, discord_name, class, money, reputation, x_pos, y_pos, =guild_id=)
 
-- resources(_resource_id_, type, amount, cargo, =cargo_id=)
+- reports(_report_id_, content, creation_time, =player_id=)
 
-- ship_module(=ship_id=, =module_id=)
+- polls(_poll_id_, type, creation_time)
 
-- ships(_ship_id_, fuel, =player_name=)
+- votes(=poll_id=, =player_id=)
 
-- voted(=vote_id=, =player_name=)
+- ships(_ship_id_, fuel, =player_id=)
+
+- modules(_module_id_, level, state, type, =ship_id=)
+
+- cargos(_cargo_id_, =module_id=)
+
+- items(_item_id_, amount, =cargo_id=, =building_id=)
+  - [ ] make /either/ constraint, (cargo/building)
+
+- resources(_resource_id_, type, =item_id=)
+
+- building_upgrades(=building_id=, =item_id=)
 
