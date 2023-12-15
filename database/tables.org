@@ -5,7 +5,7 @@ TABLES:
 
 - buildings(_building_id_, level, building_type, =planet_id=)
 
-- guilds(_guild_id_, announcement_channel, =planet_id=)
+- guilds(_guild_id_, name, announcement_channel, =planet_id=)
 
 - players(__player_id_, discord_name, class, money, reputation, x_pos, y_pos, =guild_id=)
 
