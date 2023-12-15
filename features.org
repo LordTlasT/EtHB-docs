@@ -1,0 +1,322 @@
+#+TITLE: EHB Features
+#+AUTHOR: Luca Raymaekers
+#+TAGS: MVP(m) notMVP(n) WIP(w)
+#+OPTIONS: html-postamble:nil
+#+STARTUP: overview
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+HTML_HEAD: <meta property="og:title" content="Ethereal Hyperspace Battleships - Features" />
+#+HTML_HEAD: <meta property="og:type" content="article" />
+#+HTML_HEAD: <meta property="og:url" content="https://spacehb.net" />
+#+HTML_HEAD: <meta property="og:description" content="Exhaustive list of features for EHB.">
+#+HTML_HEAD: <meta property="og:image" content="https://spacehb.net/icon.webp" />
+#+HTML_HEAD: <meta property="og:site_name" content="Spacehb" />
+
+@@html:<p><img width=128 height=128 src="icon.webp" alt="icon" />@@
+
+* Start of the game                                                     :MVP:
+** Tutorial
+When starting out for the first time the player is instructed through
+a tutorial. He/She/Them learns the basics of the game. Afterwards the
+player should choose their main guild which will lead them to /spawn/ on
+the suitable HQ. From there on the adventure begins!
+** Spawn
+The spawn hub where players start out the game. C4MPU5 K441.
+** Choosing a guild                                                    :WIP:
+The player chooses a main guild from four choices.
+1) Guild
+2) Guild
+3) Guild
+4) Guild
+** Choose your character
+Players can choose out of multiple classes:
+
+- Martian ::
+  - Longer cooldowns on travel commands.
+  - More energy in battleships.
+
+- Dwarf ::
+  - Can mine faster.
+  - Can sell resources at higher price
+  
+- Droid ::
+  - Better healer.
+  - Repairs damaged spaceships faster.
+  - Has bonus when refueling other players.
+* Main Guild                                                            :MVP:
+** Guild Communication                                                 :WIP:
+Upon the creation of guilds, channels are created for dedicated use.
+The purpose is to make it easy for guild players to interact with
+their fellow guild members.
+
+*** Global channels
+These are accessible to the entire server.
++ text:
+  - #general :: For talking about game stuff with everyone. 
+  - questions :: Here people can ask questions to the main community
+  - #announcements :: Players cannot post here. This is for global
+    game announcements by the server itself.
+
++ voice:
+  - general :: General voice for server-wide stuff.
+
+*** Channels per guilds
+These created channels will only be accessible from people inside of
+the guild.  A main guild gets the current default channels:
+
++ text:
+  - #general :: To communicate about game related stuff.
+  - #announcements :: The guild leader has the permission to ping
+    people here and can send messages to all people, this channel
+    will also be used for related ~guild activities~. This channel will
+    be in slow mode.
+  - #off-topic :: People can talk about things that do not fit in =#general=.
+  - #trading :: channel where users can con themselves
+  - guides :: Through the guides ~forum~, players can share their
+    knowledge, strategies and findings.
+*Text channels in the main guild have ~slow mode~ enabled by default
+
++ voice:
+  - quarters :: for general vocal stuff
+  - meeting room :: a stage channel, officers can host stages to talk
+    to the guild members
+** Hierarchy
+A guild is composed of a guild leader and optionally
+officers. Officers and the leader can iniate building creations. 
+*** Becoming officer
+To become an officer in main guilds you need to reach a certain
+~reputation~ threshold.
+** Guild HQ
+A guild has head quarters on a mother planet this is a safe spot in
+public guilds it can be not taken over and cannot move.
+** Buildings
+*** Building system
+Buildings start at level 0 and can be upgraded. A building at level 0 is
+empty (hidden) and the player needs to creaete it.
+
+Officers can place buildings on 'empty' locations in planets. Every
+player in the guild can contribute resources to to the construction of
+the building.
+- Shops (notMVP) :: In shops you can buy items with the game currency and sell
+  your resources.
+- Repair Station :: If your spaceship has occurred damage it can be repaired here.
+- Outpost (notMVP) :: Can be loaned to another guild. Ambassady (Vacation
+  house). Actually an enclave.
+- Factory (notMVP) :: To create special/complex resources by fusing, merging,
+  ... This will allow you to use more complex modules in your
+  spaceship
+- Mining Stations (Asteroids/Planets) (notMVP) :: Gives boosts on mining: reduced cooldown...
+- Space Warps (Teleportation) (notMVP) :: Teleports to locations far away betwen them. You will need
+  permissions to use them, you must own them both.
+- Trading Station (notMVP) :: Trade resources, like a shop but without buying.
+*** Upgrades
+Guilds can upgrade buildings, users can contribute to the resources
+needed for upgraded.
+*** Combat Buildings                                               :notMVP:
+- Defense buildings :: Towers that must be supplied with munitions
+  (during invasion) and will defend the base.
+- 1-time-use mines :: Mines that explode when reached.
+** Taxes                                                            :notMVP:
+Guilds can place taxes on certain buildings (repair shops, mines, ...).
+** Casino                                                           :notMVP:
+The casino has following minigames:
+- Roulette
+- Blackjack
+- Lower or Higher
+- Dice Roll
+*** NPCs populating shops, part of UI
+*** NPCs giving out missions
+* Private Guild System                                               :notMVP:
+The guild system is the same as the main guild system, but with some
+discrepancies:
+** Invitation
+People can send invitation for other players to join their private guild.
+** Becoming officers
+Not like in main guilds, the officers are chosen through the leader.
+* Spaceships                                                            :MVP:
+It has space in its name so it must be in the game.
+** Modules
+Modules start at level 0 and can be upgraded. A module on level 0 is
+disabled (hidden) and the player needs to unlock it.
+
+Later on the player will be able to create/purchase new modules and
+store them in their cargo or add them to their ship.
+
+Each module can have one of the different states:
+- active :: the player is able to use the module.
+- inactive :: the player is unable to use the module
+ 
+*** Default
+A basic starter has following modules enabled by default:
+- Travel Module :: Allows for traveling.
+- Mining Module :: Allows you to mine.
+- Combat module :: Allows for space combat.
+- Fuel :: Determines how far off you can go, at the early development
+  this will always be on 100%.
+- Cargo :: Determines how many resources you can hold
+- Radars :: Allows to see other spaceships nearby during combat.
+- Energy Generator :: Generates energy, consumes uranium.
+Each module is upgradable (with the ~/upgrade~ command) and can become more efficent and/or more powerful.  
+** Energy Consumption
+Some modules require energy, munitions, specific resources to function.
+** Extra Modules                                                     :notMVP:
+- Space Jump :: Travel instantly over a short distance. Requires
+  energy.
+- Turret :: Allows for space combat.
+- Baracks :: You can host soldiers, this is required for on-spaceship
+  combat and invasion.
+- Oxygen modules :: Allows to go on gas planets.
+- Helper module :: To help out other spaceship that have no fuel.
+** Skill Tree                                                   :notMVP:WIP:
+Player can use the skill true to /build/ their spaceship.  It allows to
+specialize in certain areas.
+- Quicker space travel :: Have quicker space travel.
+- Lower cooldowns :: Have lower cooldown on certain commands.
+** Combat
+*** Space
+Spaceships can be used for combat. They have attacking and defending
+capabilities. They see each other using the radar and the victor will
+take a portion (30%) of the oppononent's resources.
+*** Planet & Boarding                                              :notMVP:
+Barracks are used to host soldiers, these can be used for invasion and
+on board combat.
+* General Gameplay                                                      :MVP:
+** Commands
+The gameplay is regulated by discord commands. Some commands may cost money and some commands may have a cooldown.
+- /travel :: You can travel to a planet by inputting the correct
+  coordinates. On a planet you can visit buildings like a shop, a mine
+  and other guild buildings. (cooldown command + fuel consumption)
+- /mine :: Resources can be obtained through mining at
+  mines. (cooldown command)
+- /help :: Shows available commands and their description.
+- /register :: Creates an account for the player registering them in
+  the database. The user should be able to choose a name. This also
+  initiates the tutorial for said player.
+- /ship :: Gives the description of your ship, this inludes
+  - available modules
+  - inventory of cargo
+  - available energy
+- /upgrade :: Used to upgrade a module of your ship.  (cooldown
+  command + resources consumption)
+
+** Resources
+Resources are used through the game for creation, building and
+upgrades. They can be be trade between players. Resources are stored
+in the cargo of the spaceship.
+- copper ::
+- gold :: 
+- silver :: 
+- uranium :: used for supplying energy to the spaceship
+- Black matter :: used for warps
+*** Trading
+Players can trade resources with each other if they are on the same
+coordinate (location). They can trade everything in their cargo
+and/or their money.
+** Money
+Global currency used throughout the game.
+*** Multiple currencies                                            :notMVP:
+If the game grows big enough, there may be space for implementing
+multiple currencies between planets and guilds.
+** Death
+After taking too much damage the user dies. This results in a lost of
+50% of resources and requires the spaceship to be
+repaired. (damaged state)
+** Reputation                                                          :MVP:
+Players have a reputation stat. Every week a player can give some
+reputation to another player.
+player. This stat is used:
+- for elections (becoming an officer)
+* UI                                                                    :MVP:
+ASCII art for output. And discord-ui.
+* World Generation                                                  :notMVP:
+Infinite world through procedural generation
+Expands with player count threshold
+* Administration                                                        :MVP:
+** Admins
+The game will have administrators. By default the discord
+administrators will be administrators in the game.
+Admins can:
+- Mute/Ban users in Discord channels
+** Developers
+We as developers are in charge of:
+- Deletion of user accounts
+- Resetting user accounts
+- Server maintenance
+** Guild Management                                                    :MVP:
+Within guilds there will be moderation as well.
+Guild officers can:
+- Kick out people
+- Accept invites
+- Assign officers
+Guild leaders can:
+- Do the same, but they can kick officers
+** Report/Bug                                                          :MVP:
+Users can report bugs/issues/ideas through tickets
+* Binding the community                                                :MVP:
+These are the features meant for bringing the community together.
+** daily coop missions
+Missions with a minimum player count that refreshes daily.
+** Riddles and puzzles
+Riddles and puzzles that people have to resolve by sharing
+information. Some player will have information that others won't.
+** Large ship missions                                             :notMVP:
+Players may be put together in a large ship where they have to
+cooperate. Each having a different role (cook, captain, mechanician).
+** Leaderboard
+To add on competitiveness:
+A leaderboard for main guilds.
+A leaderboard for private guilds.
+** Coop modules for spaceships                                     :notMVP:
+Modules to be able to travel with people. Example:
+- supporting modules that could repair another ship while traveling,
+  while the other has a larger radar instead.
+** Vote system
+When wanting to create a new build, the officer/leader initiates a
+vote and members vote on this decision. These votes are made for
+guild-wide decisions. Players are notified in a 'announcements' channel.
+
+The vote succeeds if more than 50% votes yes.
+** Power-up                                                        :notMVP:
+When doing actions together, missions there will be power-up.
+** Friendship points                                               :notMVP:
+A currency based on interaction between players.
+** Fuel treating                                                   :notMVP:
+Able to refuel spaceships of other players.
+** offline events                                                  :notMVP:
+Events organized in the school itself. Example:
+- QR code they have to scan at the canteen.
+- Presentation of the game to students.
+** Voice Channel with AI music & narrator                          :notMVP:
+For ambiance. Can be pretty cool:
+- Narrating space battles.
+- Notifications of spaceship state.
+- Talk of NPCs
+** Tournament                                                      :notMVP:
+PvP with nothing to lose: everything gets reset after the
+tournament. An opportunity to meet new players who like to fight and
+be the best.
+** Advent Calendar                                                 :notMVP:
+Guild-wide objectives where each player can contribute to the
+missions. With exceptional rewards.
+** Passive income
+By typing messages you can randomly get rewards. After having received
+a reward there is a cooldown for which the player will not be able to
+receive a reward.
+
+There will also be a reward when people are active in voice channels (mic).
+
+* Notes                                                                 :WIP:
+** Vocab
+- guild activities :: Events happening within the guild. Like elections, the constructions of new buildings, ...
+
+** TODO MVP
+- [ ] Buildings should have a description of where they can be found
+  and how much they cost on creation.
+- [ ] Modules should have a cost of upgrade.  
+- [ ] Cooldowns should already be specified.
+- [ ] Fuel consumption can be described.
+- [ ] Combat system should be more detailed.  (see miro)
+** TODO notMVP
+- [ ] Casino games can have a better description
+- [ ] NPC system should be described more completely
+- [ ] The invitation system should use ~/invite~ command
+  
