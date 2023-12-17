@@ -5,15 +5,15 @@ TABLES:
 
 - buildings(_building_id_, level, building_type, =planet_id=)
 
-- guilds(_guild_id_, name, announcement_channel, =planet_id=)
+- guilds(_guild_id_, name, =planet_id=)
 
-- players(__player_id_, discord_name, class, money, reputation, x_pos, y_pos, =guild_id=)
+- players(_player_id_, discord_id, discord_name, class, money, reputation, x_pos, y_pos, =guild_id=)
 
 - reports(_report_id_, content, creation_time, =player_id=)
 
 - polls(_poll_id_, type, creation_time)
 
-- votes(=poll_id=, =player_id=)
+- votes(=poll_id=, =player_id=, polarity)
 
 - ships(_ship_id_, fuel, =player_id=)
 
