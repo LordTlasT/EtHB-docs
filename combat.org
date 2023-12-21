@@ -1,0 +1,192 @@
+/Using python pseudo-code/
+
+* Combat
+After using =/attack=, players fight with ships passing nearby.
+
+** Utils
+Can be associated with combat, but not necessarily.
+*** Scanning
+A player can scan for other players around with the radar module.
+#+begin_src python :results output
+  class Radar:
+      def scan(starting_position: Coordinate, range=1) -> tuple:
+          """Returns a list of players nearby or none if no players in range."""
+          return players_found
+
+  class Player:
+      def info(self, info_level=1) -> dict:
+          """Return information on a player and his ship."""
+          information = { "name": name, "distance": distance }
+          if info_level == 2:
+              information = { **information, "class": class, "hp": hp }
+          return information
+
+  if command = '/radar':
+      range = 1
+      energy_diff = 2
+      info_level = 2
+  elif command = '/long_radar':
+      range = 5
+      energy_diff = 10
+      info_level = 1
+
+  players = radar.scan(position=player.position, range=range)
+  players_info = [ player.info(players=players, info_level=info_level) for player in players ]
+  player.energy -= energy_diff
+
+#+end_src
+NOTE: coordinate is location in the code and should be renamed.
+
+*** Status
+#+begin_src python :results output
+  class Player:
+      def status(self) -> dict:
+          """Returns information status in a summary form."""
+          return { "hp": hp, "range": range, "weapon": weapon }
+#+end_src
+
+*** Target
+After having received a list of players nearby, a player can choose to
+target a ship.
+#+begin_src python :results output
+  if comand = '/attack':
+      player.combat_state = True
+#+end_src
+
+** Movememnt
+To dodge attacks, flee or get closer to your opponent.  Movement is
+done in units of 1.
+*** warp
+#+begin_src python :results output
+  class Player:
+      def warp(self, destination: Coordinate):
+          """Teleports over a short distance"""
+          if distance(self.position, destination) > self.max_warp_distance:
+              raise ValueError
+          self.position = destination
+      
+  if command = '/warp':
+      player.warp(destination=input_position)
+      energy_diff = 15
+
+  player.energy -= energy_diff
+#+end_src
+*** move
+#+begin_src python :results output
+  class Player:
+      def move(desintation: Coordinate):
+          """Teleports over a short distance"""
+          distance = x + y
+          if distance(self.position, destination) > self.max_move_distance:
+              raise ValueError
+          self.position = destination
+
+  if command = '/move':
+      player.move(destination=input_position)
+      energy_diff = 2
+
+  player.energy -= energy_diff
+#+end_src
+
+** Attack
+Try to damage the opposing ship by various attack methods.
+*** Damage
+Damage is calculated by following variables:
+- base_hit_chance :: a global variable that is the minimum chance of
+  hitting for all players
+- hit_chance :: a multiplier that is influenced by
+  - distance to opponent
+  - if the lock command was used recently
+- stats :: stats can influence the damage done and probality of hitting
+  - the player's hp
+  - the canon's level influences damage and hit chance
+  - the shield's level influences defense
+- base_damage :: this is the damage of the weapon.
+    
+#+begin_src python :results output
+  import random
+
+  BASE_HIT_CHANCE = 40
+
+  class Player:
+      def __init__(self):
+          self.combat = { "hp": 20, "max_hp": 20, "in_combat": False, "hit_chance": 0 }
+
+      def damage(self, base_damage: int) -> int:
+          """Inflict damage on an opponent."""
+
+          r = random.randint(1, 100): 
+          if r < BASE_HIT_CHANCE + self.combat["hit_chance"]: 
+              return 0
+
+          return damage
+#+end_src    
+*** lock
+Increases the hit chance
+#+begin_src python :results output
+  import asyncio
+
+  LOCK_COOLDOWN = 5
+  HIT_CHANCE_STEP = 5
+
+  class Player:
+      def __init__(self):
+          self.combat = { "hp": 20, "max_hp": 20, "in_combat": False, "hit_chance": 0 }
+
+      def lock(self):
+          """Increase hit chance."""
+          self.combat["hit_chance"] += HIT_CHANCE_STEP
+          asyncio.sleep(LOCK_COOLDOWN)
+
+  if command = '/lock':
+      player.lock()
+      self.energy -= 5
+#+end_src
+- NOTE: Not very rp, should player be in range? see [[Scanning]].
+
+*** shoot
+The most basic attack.  See [[Damage]] and [[Defense]].
+#+begin_src python :results output
+  if command = '/shoot':
+      damage = player.damage(player.modules["Canon"].damage)
+      damage = opponent.ship.modules.["Shield"].absorb(damage)
+      opponent.combat["hp"] -= damage
+      energy -= 4
+#+end_src
+** Defense
+Your shield has an impact on how much damage you take, it has an
+absorbing capability.  It can asborb X percent of damage and has a
+limit of total damage it can absorb after which it breaks and should
+be repaired at the repair shop.
+
+See [[Damage]].
+
+#+begin_src python :results output
+  import random
+
+
+  class Shield:
+      def __init__(self):
+          self.health = 100
+
+      def absorb(damage: int) -> int:
+          """Absorbs a portion of the damage in hp."""
+          if damage == 0:
+              return 0
+          if damage < 0:
+              raise ValueError("Cannot absorb negative damage.")
+          # can absorb from half the damage up to all the damage, but no more than its health.
+          absorbed = random.randint(damage//2, damage)
+          if absorbed > self.health:
+              absorbed = self.health
+          self.health -= absorbed
+          return damage - absorbed
+#+end_src
+* Questions
+- Hp is not implemented yet. Which other stats are there?
+- Where to put damage randoms?
+- Maybe make something more generic for energy consumption.  Decorator
+  to set that some commands can consume energy.
+  
+  
+  
