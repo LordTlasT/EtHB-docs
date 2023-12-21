@@ -1,7 +1,7 @@
 TABLES:
 - locations(_location_x_pos_, _location_y_pos_, name)
 
-- planets(_planet_id_, free_slots, =location_x_pos=, =location_y_pos=)
+- planets(_planet_id_, slots, =location_x_pos=, =location_y_pos=)
 
 - buildings(_building_id_, level, building_type, =planet_id=)
 
@@ -9,22 +9,26 @@ TABLES:
 
 - players(_player_id_, discord_id, discord_name, class, money, reputation, x_pos, y_pos, =guild_id=)
 
-- reports(_report_id_, content, creation_time, =player_id=)
+- reputations(=giver_id=, =receiver_id=, creation_time)
+
+- reports(_report_id_, content, creation_time, discord_id)
 
 - polls(_poll_id_, type, creation_time)
 
 - votes(=poll_id=, =player_id=, polarity)
 
-- ships(_ship_id_, fuel, =player_id=)
+- ships(_ship_id_, =player_id=)
 
 - modules(_module_id_, level, state, type, =ship_id=)
 
-- cargos(_cargo_id_, =module_id=)
+- fuel_modules(_fuel_module_id_, fuel, =module_id=)
 
-- items(_item_id_, amount, =cargo_id=, =building_id=)
-  - [ ] make /either/ constraint, (cargo/building)
+- cargo_modules(_cargo_module_id_, =module_id=)
 
-- resources(_resource_id_, type, =item_id=)
+- items(_item_id_, name, type, amount, =cargo_module_id=)
+  - [ ] fix items without a reference
+    - make /either/ constraint, (cargo/building)
+    - garbage collect them
 
-- building_upgrades(=building_id=, =item_id=)
+- contributions(=building_id=, =item_id=)
 
