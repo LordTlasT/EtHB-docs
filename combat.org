@@ -1,11 +1,34 @@
 /Using python pseudo-code/
 
+* Scenario
+
+When people are traveling they can scan around them for players with
+~/radar~.  The radar indicates if there are players nearby.
+A player can then choose to taregt a player to enter combat using
+~/target~.  The player then enters in a combat phase that will last
+until one player dies or if they are out of range of each other and
+have not been damaged for 1 minute.
+
+When in combat players try to shoot at each other and kill each othe
+off using ~/shoot~, when this hits it damages the opponents ship.  The
+success rate will be based on locking and luck.  The damage will be
+calculated from the weapon used and also some luck factor.  A player's
+shield can absorb some of the damage until it breaks.
+When in combat players can ~/lock~ to increase their chance of hitting
+the opposing ship.
+
+When either of the players' ship has been damaged enough, aka hits 0
+hp.  The player will 'die' and respawn back on (0, 0).  He will have a
+broken ship and will need to repair it.
+
+The winner on the other hand will take 30% of the resources of the opponent.
+
 * Combat
 After using =/attack=, players fight with ships passing nearby.
 
 ** Utils
 Can be associated with combat, but not necessarily.
-*** Scanning
+*** scanning (radar)
 A player can scan for other players around with the radar module.
 #+begin_src python :results output
   class Radar:
@@ -37,7 +60,7 @@ A player can scan for other players around with the radar module.
 #+end_src
 NOTE: coordinate is location in the code and should be renamed.
 
-*** Status
+*** status
 #+begin_src python :results output
   class Player:
       def status(self) -> dict:
@@ -45,11 +68,11 @@ NOTE: coordinate is location in the code and should be renamed.
           return { "hp": hp, "range": range, "weapon": weapon }
 #+end_src
 
-*** Target
+*** target
 After having received a list of players nearby, a player can choose to
 target a ship.
 #+begin_src python :results output
-  if comand = '/attack':
+  if command = '/attack':
       player.combat_state = True
 #+end_src
 
@@ -71,6 +94,8 @@ done in units of 1.
 
   player.energy -= energy_diff
 #+end_src
+- cancelled if hit
+- loading time, but instant travel
 *** move
 #+begin_src python :results output
   class Player:
